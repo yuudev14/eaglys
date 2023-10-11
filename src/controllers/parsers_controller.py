@@ -27,7 +27,7 @@ async def parse_query(sql_payload: SQL_Payload):
 
 
 @parser_route.post("/columns/mapped")
-async def parse_query(sql_payload: SQL_Payload):
+async def mapped_hashed_columns(sql_payload: SQL_Payload):
     """
     api that returns the key value pair of the original column and the hashed column
     Args:

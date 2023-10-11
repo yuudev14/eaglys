@@ -7,11 +7,11 @@ from src import constants
 
 app = FastAPI()
 
-
 # add cors
 app.add_middleware(
     CORSMiddleware,
     allow_origins=constants.ALLOWED_ORIGIN,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
