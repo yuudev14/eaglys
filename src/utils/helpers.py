@@ -76,3 +76,20 @@ def hashed_columns(
             else:
                 result += token.value
     return result
+
+
+def mapped_hashed_columns(columns: list[str]) -> str:
+    """
+    mapped hashed columns
+    Args:
+        columns [list[str] -> columns to hashed
+    Returns:
+        return a dictionary where keys are the original columns and values is hashed in sha256
+    """
+    result = {}
+    for _col in columns:
+        sha256 = hashlib.sha256()
+        sha256.update(_col.encode("utf-8"))
+        hashed_string = sha256.hexdigest()
+        result[_col] = hashed_string
+    return result
