@@ -30,16 +30,21 @@ export default function Home() {
 
   return (
     <main className="w-full max-w-[1080px] m-auto pt-20">
-      <form onSubmit={submitHandler} className='flex flex-col gap-5 w-full max-w-[700px]'>
-        <textarea onChange={(e) => setSql(e.target.value)} className='border p-3' />
-        <input type="submit" value="Submit" />
-      </form>
-      {!modifiedSQL.isLoading && modifiedSQL.data && (
-        <p><span>Modified SQL:</span> {modifiedSQL.data.data.result}</p>
-      )}
-      {!mappedHasedColumns.isLoading && mappedHasedColumns.data && (
-        <p><span>Modified SQL:</span> <pre>{JSON.stringify(mappedHasedColumns.data.data.result, null, 2)}</pre></p>
-      )}
+      <div className='w-full max-w-[700px] m-auto'>
+        <form onSubmit={submitHandler} className='flex flex-col gap-5 w-full'>
+          <label htmlFor='sql' className='font-bold'>Insert your SQL code here</label>
+          <textarea id="sql" onChange={(e) => setSql(e.target.value)} className='border p-3 w-full h-[300px]' placeholder='ex: SELECT col from table' />
+          <input className='bg-teal-500 text-white px-3 py-2 rounded-lg shadow-lg' type="submit" value="Submit" />
+        </form>
+        <div className='flex flex-col gap-5 mt-7'>
+          {!modifiedSQL.isLoading && modifiedSQL.data && (
+            <div><p className="font-bold">Modified SQL:</p> <code>{modifiedSQL.data.data.result}</code></div>
+          )}
+          {!mappedHasedColumns.isLoading && mappedHasedColumns.data && (
+            <div><p className="font-bold">Mapped Columns:</p> <pre>{JSON.stringify(mappedHasedColumns.data.data.result, null, 2)}</pre></div>
+          )}
+        </div>
+      </div>
 
     </main>
   )
