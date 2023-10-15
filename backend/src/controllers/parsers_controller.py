@@ -21,7 +21,7 @@ async def parse_query(sql_payload: SQL_Payload):
     """
     parsed = sqlparse.parse(sql_payload.sql)
     columns = utils.helpers.find_columns(parsed)
-    sql_hashed_columns = utils.helpers.hashed_columns(parsed[0], columns)
+    sql_hashed_columns = utils.helpers.hashed_columns(parsed[0].flatten(), columns)
 
     return {"result": sql_hashed_columns}
 

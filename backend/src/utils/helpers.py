@@ -8,7 +8,7 @@ import sqlparse
 def find_columns(
     tokens: tuple[sqlparse.sql.Statement | Any, ...],
     is_possible_column: Optional[bool] = False,
-    columns: Optional[list[str]] = [],
+    columns: Optional[list[str]] = None,
 ) -> list[str]:
     """
     Find all the columns in the sql query
@@ -19,6 +19,8 @@ def find_columns(
     Returns:
         list of columns available in the sql query
     """
+    if columns is None:
+        columns = []
     for token in tokens:
         if isinstance(token, sqlparse.sql.Statement):
             find_columns(token.tokens, is_possible_column, columns)
@@ -68,6 +70,7 @@ def hashed_columns(
         return sql query where all the columns are hashed in sha256
     """
     result = ""
+    print(tokens)
     for token in tokens:
         if isinstance(token, sqlparse.sql.Token):
             if token.value in columns:
