@@ -1,14 +1,14 @@
-FROM node:18.17.1
+FROM node:18
 
 WORKDIR /app
-COPY package*.json ./
+
+COPY package.json .
+
 RUN npm install
-COPY . .
-RUN npm run build
 
-# Stage 2: Create a smaller image for production
-FROM node:14
-WORKDIR /app
-COPY --from=build /app . 
+COPY . .
+
 EXPOSE 3000
+# required for docker desktop port mapping
+
 CMD ["npm", "start"]
